@@ -25,4 +25,4 @@ jobs:
 
       - name: Execute shell script on remote server
         run: |
-          ssh -i ~/.ssh/id_rsa team-fire@218.32.100.27 -p 1522 'bash -s' < ./sync_server.sh
+          ssh -i ~/.ssh/id_rsa -p 1522 team-fire@218.32.100.27 'bash -s' < ./sync_server.sh
