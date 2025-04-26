@@ -1,6 +1,6 @@
-const port=7000;
+const ip = require('./ip');
 const http = require('http');
 http.createServer(function(req, res) {
     res.writeHead(200, {'content-type':'text/html'});
     res.end('Hello world!!');
-}).listen(port, () => console.log(`Server running at http://localhost:${port}`));
+}).listen(ip.port, () => console.log(`Server running at http://${ip.addr}:${ip.port}`));
