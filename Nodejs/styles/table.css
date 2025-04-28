@@ -1,0 +1,50 @@
+table {
+  border: 1px solid black;
+  width: 50%;
+  border-collapse: collapse;
+  margin: 80px auto;
+}
+
+.current_status th{
+  background-color: white;
+  font-size: 20px;
+}
+
+th,
+td {
+  text-align: center;
+  border: 1px solid gray;
+  height: 50px;
+}
+
+th{
+  background-color: silver;
+}
+
+tbody tr:hover {
+  background-color: rgb(206, 203, 164);
+}
+
+.insert_table{
+  width: 30%;
+}
+
+
+.table_scroll {
+  width: 40%;
+}
+
+.table_scroll th, .table_scroll td{
+  width: 50%;
+}
+
+.table_scroll tr:first-child{
+  text-align: center;
+}
+
+.table_scroll tr:last-child{
+  font-weight: 1000;
+  background-color: silver;
+}
+
+
