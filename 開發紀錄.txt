@@ -1,0 +1,39 @@
+picow的距離資料用tcp傳到raspberry pi //這段都是python，傳送跟測距都是
+raspberry pi上用攝像頭與得到的距離資料去判斷要不要拍照 //這段是用python，會用到venv的python虛擬環境
+將照片用tcp傳到debian端進行儲存後，會將本地端的照片刪除 //這段是用C
+用shell script去一次操控所有的功能
+
+
+cat /sys/kernel/debug/gpio 用驅動去控制GPIO針腳時要先用這段去查詢對應的gpio碼，不是用原本的GPIO
+echo "on" | sudo tee /dev/mychardev
+ls -l /dev/mychardev
+
+
+===安裝函式庫===
+sudo apt update
+sudo apt upgrade
+
+sudo apt install python3 python3-venv python3-pip -y
+python3 -m venv venv //建立虛擬環境
+
+//opencv和ultralytics
+pip install opencv-python 
+sudo apt install libopencv-dev python3-opencv -y
+pip install --upgrade pip
+pip install numpy
+pip install ultralytics
+
+//gpiozero
+sudo apt update
+sudo apt install python3-gpiozero -y
+
+//pyserial
+pip install pyserial
+
+
+===Flask網頁===
+
+flask run --host=0.0.0.0 #能夠監聽所有的網路介面
+
+4/28 目前有成功用python的flask進行網頁串流攝像機的畫面，然後正在製作用socket的檔案傳輸以及接收，下一步是要做能夠把圖片的狀態更新到網頁上，
+讓使用者能夠將圖片下載或是直接在網頁上瀏覽
