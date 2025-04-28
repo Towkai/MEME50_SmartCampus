@@ -1,7 +1,7 @@
 import socket
 
 HOST = socket.gethostname()
-PORT = 6000
+PORT = 3000
 
 if __name__ == "__main__":
 	print("Start")
