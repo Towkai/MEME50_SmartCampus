@@ -11,7 +11,8 @@
 #include "sdrs.h"
 #include "file_upload.h"
 
-void* thread_function(void* arg);
+void* thread_camera(void* arg);
+void* thread_upload(void* arg);
 extern int file_upload(char* filename);
 
 int main() {
@@ -22,26 +23,23 @@ int main() {
 
     while (1) {
         // 建立子執行緒
-        pthread_t thread_id;
+        pthread_t thread_camera_id;
+        pthread_t thread_upload_id;
         int res;
         void *thread_result;
-        res = pthread_create(&thread_id, NULL, thread_function, NULL);
+        res = pthread_create(&thread_camera_id, NULL, thread_camera, NULL);
         if (res != 0) {
             perror("Thread creation failed");
             exit(1);
         }
         // 等待子執行緒結束
-        res = pthread_join(thread_id, &thread_result);
+        res = pthread_join(thread_camera_id, &thread_result);
         if (res != 0 || thread_result == NULL) {
             perror("Thread join failed");
             exit(EXIT_FAILURE);
         }
         // printf("Thread finished with result: %s\n", (char*)thread_result);
-        int result = file_upload((char*)thread_result);
-        if (result == 0)
-            printf("File upload successful.\n");
-        else
-            printf("File upload failed.\n");
+        pthread_create(&thread_upload_id, NULL, thread_upload, (char*)thread_result);
 
         // printf("Parent received: %s\n", (char*)thread_result);
         // 等待下一次錄製
@@ -50,7 +48,7 @@ int main() {
     return 0;
 }
 
-void* thread_function(void* arg) {
+void* thread_camera(void* arg) {
     // 取得目前時間
     time_t rawtime;
     struct tm *timeinfo;
@@ -84,4 +82,14 @@ void* thread_function(void* arg) {
     }
     printf("錄製完成: %s\n", filename);
     pthread_exit(filename);
+}
+
+
+void* thread_upload(void* arg) {
+    int result = file_upload((char*)arg);
+    
+    if (result == 0)
+    printf("File upload successful.\n");
+    else
+    printf("File upload failed.\n");
 }
