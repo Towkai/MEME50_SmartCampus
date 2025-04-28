@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.file-explorer {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+.item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+.item:last-child {
+    border-bottom: none;
+}
+.folder {
+    color: blue;
+}
+.file {
+    color: green;
+}
+.info {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555;
+}

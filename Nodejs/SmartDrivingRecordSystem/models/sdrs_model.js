@@ -22,7 +22,7 @@ const FileModel = {
             });
             const parser = new xml2js.Parser();
             const result = await parser.parseStringPromise(response.data);
-            return JSON.stringify(result, undefined, 2); //prettier json
+            return result; //prettier json
             
         } catch (error) {
             throw new Error('Error fetching files:', error);
