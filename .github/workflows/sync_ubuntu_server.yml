@@ -1,0 +1,28 @@
+name: Run Shell Script via SSH
+
+on:
+  push:
+    branches:
+      - ServerMaster
+      - ServerActions
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 檢出代碼
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 設置 SSH 環境
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_RSA_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p 1522 -H 218.32.100.27 >> ~/.ssh/known_hosts
+
+      - name: Execute shell script on remote server
+        run: |
+          ssh -i ~/.ssh/id_rsa -p 1522 team-fire@218.32.100.27 'bash -s' < ./sync_server.sh
