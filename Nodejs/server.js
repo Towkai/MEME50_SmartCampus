@@ -7,5 +7,8 @@ app.listen(ip.port, function() {
 
 app.set('view engine', 'ejs');
 
-var router = require('./router');
-app.use('/', router);
+var main_router = require('./routers/main_router');
+app.use('/', main_router);
+
+var sdrs_router = require('./routers/sdrs_router');
+app.use('/sdrs', sdrs_router);
