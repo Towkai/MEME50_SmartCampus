@@ -5,6 +5,7 @@
 #define NEXTCLOUD_PORT 1200
 #define NEXTCLOUD_USERNAME "team-fire"
 #define NEXTCLOUD_PASSWORD "teamfire1234"
+#define NEXTCLOUD_PATH "Videos"
 
 char *next_userpwd() {
     static char userpwd[32];
@@ -14,7 +15,7 @@ char *next_userpwd() {
 
 char *getNextcloudUrl(const char *filename) {
     static char url[256];
-    snprintf(url, sizeof(url), "http://%s:%d/remote.php/dav/files/%s/%s", NEXTCLOUD_IP, NEXTCLOUD_PORT, NEXTCLOUD_USERNAME, filename);
+    snprintf(url, sizeof(url), "http://%s:%d/remote.php/dav/files/%s/%s/%s", NEXTCLOUD_IP, NEXTCLOUD_PORT, NEXTCLOUD_USERNAME, NEXTCLOUD_PATH, filename);
     return url;
 }
 

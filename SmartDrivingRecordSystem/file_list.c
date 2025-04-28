@@ -1,53 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "file_list.h"
+#include "nextcloud.h"
 
-// 函數用於創建新的檔案節點
-FileInfo *createFileInfo(const char *path, const char *lastModified, long contentLength, const char *etag, const char *contentType) {
-    FileInfo *newFile = (FileInfo *)malloc(sizeof(FileInfo));
-    newFile->path = strdup(path);
-    newFile->lastModified = strdup(lastModified);
-    newFile->contentLength = contentLength;
-    newFile->etag = strdup(etag);
-    newFile->contentType = strdup(contentType);
-    newFile->next = NULL;
-    return newFile;
-}
+int main(int argc, char *argv[]) {
+    FILE *fp;
+    char buffer[65536];
+    char command[128]; // 使用 curl 命令
 
-// 函數用於釋放串列中的記憶體
-void freeFileList(FileInfo *head) {
-    FileInfo *current = head;
-    while (current != NULL) {
-        FileInfo *temp = current;
-        current = current->next;
-        free(temp->path);
-        free(temp->lastModified);
-        free(temp->etag);
-        free(temp->contentType);
-        free(temp);
+    snprintf(command, sizeof(command), "curl -u team-fire:teamfire1234 -X PROPFIND %s -H Depth: 1 -s", getNextcloudUrl(argc > 1 ? argv[1] : ""));
+    printf("command: %s\n", command);
+    // 使用 popen 執行命令並獲取輸出
+    fp = popen(command, "r");
+    if (fp == NULL) {
+        perror("popen failed");
+        return 1;
     }
-}
 
-// 函數用於新增檔案到串列
-void appendFile(FileInfo **head, FileInfo *newFile) {
-    if (*head == NULL) {
-        *head = newFile;
-    } else {
-        FileInfo *current = *head;
-        while (current->next != NULL) {
-            current = current->next;
-        }
-        current->next = newFile;
+    // 讀取命令的輸出
+    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+        printf("%s", buffer);
     }
-}
 
-// 函數用於顯示串列中的檔案資訊
-void displayFileList(FileInfo *head) {
-    FileInfo *current = head;
-    while (current != NULL) {
-        printf("Path: %s\n", current->path);
-        printf("Last Modified: %s\n", current->lastModified);
-        printf("Content Length: %ld bytes\n", current->contentLength);
-        printf("ETag: %s\n", current->etag);
-        printf("Content Type: %s\n\n", current->contentType);
-        current = current->next;
+    // 關閉管道
+    if (pclose(fp) == -1) {
+        perror("pclose failed");
+        return 1;
     }
+
+    return 0;
 }

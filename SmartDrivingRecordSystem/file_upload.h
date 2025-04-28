@@ -5,6 +5,7 @@
 #include <string.h>
 #include "sdrs.h"
 #include "nextcloud.h"
+
 static size_t read_callback(void *ptr, size_t size, size_t nmemb, FILE *stream) {
     size_t retcode = fread(ptr, size, nmemb, stream);
     return retcode;
@@ -24,12 +25,11 @@ static size_t progress_callback(void *clientp, curl_off_t dltotal, curl_off_t dl
 }
 
 
-int file_upload(int argc, char *argv[]) {
+int file_upload(char* filename){
     CURL *curl;
     CURLcode res;
     FILE *hd_src;
     char full_filename[512];
-    char *filename = argv[1]; // 從命令行參數獲取檔案名稱
     char *url = getNextcloudUrl(filename);
 
     snprintf(full_filename, sizeof(full_filename), "%s/%s", OUTPUT_DIR, filename);
@@ -78,6 +78,9 @@ int file_upload(int argc, char *argv[]) {
         // 檢查上傳結果
         if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }
+        else {
+            printf("File %s uploaded successfully to %s\n", filename, url);
         }
 
         // 清理
