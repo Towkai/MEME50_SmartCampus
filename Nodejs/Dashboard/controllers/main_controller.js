@@ -11,8 +11,9 @@ exports.index = (req, res) => {
 };
 
 exports.Parking= (req, res) => {
-    const filePath = "../SmartParkingServer/park_data.csv";
-    const status = require('../SmartParkingServer/status.json');
-    json = csvToJson.fieldDelimiter(',').getJsonFromCsv(filePath);
+    console.log(req.path)
+    //const filePath = "./Nodejs/park_data.csv";
+    //const status = require('./Nodejs/status.json');
+    //json = csvToJson.fieldDelimiter(',').getJsonFromCsv(filePath);
     res.render('Parking', { data: json, status:status });
 };

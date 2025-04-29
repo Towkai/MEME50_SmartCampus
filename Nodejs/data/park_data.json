@@ -1,0 +1,22 @@
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car11,"time":start, 2025-04-29 02:44:54,"fees":0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car0,"time":start, 2025-04-29 02:45:09,"fees":0
+"Park":Car0,"Time":leave, 2025-04-29 02:45:14,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car1,"time":start, 2025-04-29 02:45:15,"fees":0
+"Park":Car1,"Time":leave, 2025-04-29 02:45:16,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car2,"time":start, 2025-04-29 02:45:17,"fees":0
+"Park":Car2,"Time":leave, 2025-04-29 02:45:18,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car3,"time":start, 2025-04-29 02:45:19,"fees":0
+"Park":Car3,"Time":leave, 2025-04-29 02:45:19,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car4,"time":start, 2025-04-29 02:45:20,"fees":0
+"Park":Car4,"Time":leave, 2025-04-29 02:45:21,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car5,"time":start, 2025-04-29 02:45:21,"fees":0
+"Park":Car5,"Time":leave, 2025-04-29 02:45:22,"fees":0.0
+ParkSpace,Status,Time,TotalParkingTime
+"Park":Car6,"time":start, 2025-04-29 02:45:25,"fees":0
