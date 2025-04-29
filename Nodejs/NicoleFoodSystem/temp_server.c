@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 #include <time.h>
 
-#define SERVER_PORT 12346
+#define SERVER_PORT 6001
 #define BUFFER_SIZE 512
 #define OUTPUT_FILE "temperature_data.txt"
 
