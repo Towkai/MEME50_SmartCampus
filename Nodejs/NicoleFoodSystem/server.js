@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 6001;
+const PORT = 6011;
 const DATA_FILE = path.join(__dirname, 'temperature_data.txt');
 
 const server = http.createServer((req, res) => {
