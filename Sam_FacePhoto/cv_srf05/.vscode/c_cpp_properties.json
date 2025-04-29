@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "KernelModule",
+            "includePath": [
+                "/lib/modules/6.6.51+rpt-rpi-2712/build/include",
+                "/usr/include",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "intelliSenseMode": "linux-gcc-arm64"
+        }
+    ],
+    "version": 4
+}

@@ -14,9 +14,10 @@ if __name__ == "__main__":
 	print('wait for connection...')
 
 	while True:
-
 		conn,addr=s.accept()
 		print('connected by' +str(addr))
+		with open("./Nodejs/public/data/park_data.csv", "w") as file1:
+					file1.write("CarID, Status, Time, TotalParkingTime\n")
 		while True:
 			indata = (conn.recv(1024))
 			if len(indata) == 0:
@@ -24,17 +25,17 @@ if __name__ == "__main__":
 				print('client closed connection')
 				break
 			m = indata.decode().split(",")
-			if m[1] == "start":
-				with open("status.json","w")as file2:
+			print(m[1])
+			if m[1].endswith("start"):
+				with open("./Nodejs/public/data/status.json","w")as file2:
 					file2.write("{\"status\":\"parked\"}")
-				with open("park_data.csv", "w") as file1:
-					file1.write("ParkSpace,Status,Time,TotalParkingTime\n")
+				with open("./Nodejs/public/data/park_data.csv", "a") as file1:
 					file1.write(indata.decode()+"\n")
 					file1.close()
-			elif m[1] == "leave":
-				with open("status.json","w")as file2:
+			elif m[1].endswith("leave"):
+				with open("./Nodejs/public/data/status.json","w")as file2:
 					file2.write("{\"status\":\"spaced\"}")
-				f = open("park_data.csv","a")
+				f = open("./Nodejs/public/data/park_data.csv","a")
 				f.write(indata.decode()+"\n")
 				f.close()
 

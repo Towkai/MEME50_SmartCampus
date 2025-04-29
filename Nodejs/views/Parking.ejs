@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="http://localhost:7000/table.css" />
-    <link rel="stylesheet" href="http://localhost:7000/anchor.css" />
+    <link rel="stylesheet" href="/css/anchor.css" />
+    <link rel="stylesheet" href="/css/table.css" />
+    <meta http-equiv="refresh" content="10">
 </head>
 <body>
     <table class="current_status">
@@ -21,7 +22,7 @@
         <tr><th>車牌</th><th>狀態</th><th>時間</th><th>繳費資訊</th></tr>
         <% for (let i = 0; i < data.length; i++) { %>
         <tr>
-            <td><%= data[i].ParkSpace %></td>
+            <td><%= data[i].CarID %></td>
             <td><%= data[i].Status %></td>
             <td><%= data[i].Time %></td>
             <% let fee = 10; %>

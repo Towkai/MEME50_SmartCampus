@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flask 範例</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            max-width: 640px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>歡迎，{{ username }}！</h1>
+
+    <div class="container">
+        <div class="block">
+            <h2>即時畫面</h2>
+            <img src="/video_feed">
+        </div>
+
+        <div class="block">
+            <h2>即時照片</h2>
+            <img id="latest-photo" src="" width="640">
+        </div>
+    </div>
+
+    <script>
+        function updatePhoto() {
+            fetch('/latest_photo')
+                .then(response => response.text())
+                .then(filename => {
+                    if (filename !== "no image") {
+                        const timestamp = new Date().getTime(); // 防快取，如果檔案名稱都是一樣的才會需要
+                        document.getElementById('latest-photo').src = `/images/${filename}?t=${timestamp}`;
+                    }
+                })
+                .catch(error => console.error('Error fetching latest photo:', error));
+        }
+
+        // 每3秒更新一次
+        setInterval(updatePhoto, 3000);
+
+        // 進入頁面馬上更新一次
+        updatePhoto();
+    </script>
+</body>
+
+</html>
