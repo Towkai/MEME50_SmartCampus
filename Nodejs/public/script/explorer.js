@@ -1,20 +1,28 @@
+document.querySelectorAll('.delete-button').forEach(button => {
+    button.addEventListener('click', async function() {
+        const href = this.getAttribute('data-href');
+        const confirmDelete = confirm(`您確定要刪除 ${href.split('/').pop()} 嗎？`);
+        if (confirmDelete) {
+            try {
+                const response = await fetch(href, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // 替換為您的授權令牌
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-
-// 繪製檔案總管
-// function setExplorer(jsonData) {
-    const fileExplorer = document.getElementById('fileExplorer');
-    jsonData["d:multistatus"]["d:response"].forEach(response => {
-        const href = response["d:href"][0];
-        const isFolder = href.endsWith('/'); // 判斷是否為資料夾
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'item ' + (isFolder ? 'folder' : 'file');
-        itemDiv.innerHTML = `
-                    <span>${isFolder ? '📁' : '📄'} ${href.split('/').pop()}</span>
-                    <div class="info">
-                        ${isFolder ? '' : '大小: ' + response["d:propstat"][0]["d:prop"][0]["d:getcontentlength"][0] + ' bytes'}
-                        ${isFolder ? '' : '，最後修改時間: ' + response["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0]}
-                    </div>
-                `;
-        fileExplorer.appendChild(itemDiv);
+                if (response.ok) {
+                    alert('刪除成功！');
+                    // 刪除成功後可以選擇重新加載頁面或移除該項目
+                    location.reload(); // 重新加載頁面
+                } else {
+                    alert('刪除失敗，請稍後再試。');
+                }
+            } catch (error) {
+                console.error('刪除過程中出現錯誤:', error);
+                alert('刪除過程中出現錯誤，請檢查控制台。');
+            }
+        }
     });
-// }
+});
