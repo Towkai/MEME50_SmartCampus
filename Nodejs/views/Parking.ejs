@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/anchor.css" />
+    <link rel="stylesheet" href="/css/table.css" />
+</head>
+<body>
+    <table class="current_status">
+        <tr><td>計費規則</td><td>10元/分鐘</td></tr>
+        <% if (status.status == "spaced") { %>
+        <tr><th><h2>狀態</h2></th><th style="color:green"><h2><%= "有空位" %></h2></th></tr>
+        <%} else if (status.status == "parked") { %>
+        <tr><th ><h2>狀態</h2></th><th style="color:red"><h2><%= "使用中" %></h2></th></tr>
+        <% } %>
+    </table>
+    <table class="queryall_table">
+        <tr><th colspan="4"><h2>停車紀錄</h2></th></tr>
+        <tr><th>車牌</th><th>狀態</th><th>時間</th><th>繳費資訊</th></tr>
+        <% for (let i = 0; i < data.length; i++) { %>
+        <tr>
+            <td><%= data[i].CarID %></td>
+            <td><%= data[i].Status %></td>
+            <td><%= data[i].Time %></td>
+            <% let fee = 10; %>
+            <td><%= data[i].TotalParkingTime*fee %></td>
+        </tr>
+        <% } %>
+    </table>
+</body>
+</html>

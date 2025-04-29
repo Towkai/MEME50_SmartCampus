@@ -1,0 +1,31 @@
+.insert_new:link{
+    text-decoration: none;
+    color: black;
+}
+.insert_new:visited{
+    color: black;
+}
+
+.table_ename:link{
+    text-decoration: none;
+    color: rgb(0,39,112);
+}
+.table_ename:active{
+    color: rgb(226, 147, 43);
+}
+.table_ename:hover{
+    text-decoration: underline solid blueviolet;
+    color: rgb(226, 147, 43);
+}
+.table_ename:visited{
+    color: rgb(0,39,112);
+}
+
+.backtohome:link{
+    text-decoration: none;
+    color:black;
+}
+
+.backtohome:visited{
+    color: black;
+}
