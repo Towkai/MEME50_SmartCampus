@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>FileHistroy</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/explorer.css"></head>
+    <link rel="stylesheet" type="text/css" href="/css/sdrs/videoplayer.css"></head>
+    <link rel="stylesheet" type="text/css" href="/css/sdrs/explorer.css"></head>
 </head>
 <body>
     <h1>檔案總管</h1>
@@ -13,7 +14,7 @@
             <% const href = response["d:href"][0]; %>
             <% const isFolder = href.endsWith('/'); %>
             <div id="<%= href.split('/').pop() %>" class="item <%= isFolder ? 'folder' : 'file' %>">
-                <span><%= isFolder ? '📁' : '📄' %> <%= href.split('/').pop() %></span>
+                <span class="itemname"><%= isFolder ? '📁' : '📄' %> <%= href.split('/').pop() %></span>
                 <div class="info">
                     <% if (isFolder) { %>
                         <span>大小: N/A</span>
@@ -28,12 +29,28 @@
             </div>
         <% }); %>
     </div>
+
+
+    <!-- 模態框 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeButton">&times;</span>
+            <video id="videoPlayer" width="100%" controls>
+                <source id="videoSrc" src="" type="video/mp4"> <!-- 替換為您的影片檔案 -->
+                您的瀏覽器不支援影片標籤。
+            </video>
+        </div>
+    </div>
+
+<!-- 
     <h1>在 Nextcloud 上播放影片</h1>
     <video width="640" height="360" controls>
         <source src="http://218.32.100.27:1200/remote.php/dav/files/team-fire/Videos/video_20250429_134214.mp4" type="video/mp4">
         您的瀏覽器不支援 HTML5 視訊標籤。
     </video>
-    <script src="/script/url.js"></script>
-    <script src="/script/nextcloud.js"></script>
+    -->
+    <script src="/script/sdrs/url.js"></script>
+    <script src="/script/sdrs/nextcloud.js"></script>
+    <script src="/script/sdrs/videoplayer.js"></script>
 </body>
 </html>
