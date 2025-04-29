@@ -16,6 +16,8 @@ if __name__ == "__main__":
 	while True:
 		conn,addr=s.accept()
 		print('connected by' +str(addr))
+		with open("./Nodejs/data/park_data.csv", "w") as file1:
+					file1.write("CarID, Status, Time, TotalParkingTime\n")
 		while True:
 			indata = (conn.recv(1024))
 			if len(indata) == 0:
@@ -27,13 +29,13 @@ if __name__ == "__main__":
 			if m[1].endswith("start"):
 				with open("./Nodejs/data/status.json","w")as file2:
 					file2.write("{\"status\":\"parked\"}")
-				with open("./Nodejs/data/park_data.json", "a") as file1:
+				with open("./Nodejs/data/park_data.csv", "a") as file1:
 					file1.write(indata.decode()+"\n")
 					file1.close()
 			elif m[1].endswith("leave"):
 				with open("./Nodejs/data/status.json","w")as file2:
 					file2.write("{\"status\":\"spaced\"}")
-				f = open("./Nodejs/data/park_data.json","a")
+				f = open("./Nodejs/data/park_data.csv","a")
 				f.write(indata.decode()+"\n")
 				f.close()
 
