@@ -14,8 +14,8 @@ exports.index = (req, res) => {  //固定用法：建立名為"views"的資料�
 
 exports.Parking= (req, res) => {
     console.log(req.path)
-    const filePath = "./Nodejs/park_data.csv";
-    const status = require('./Nodejs/status.json');
+    const filePath = "./data/park_data.csv";
+    const status = require('./data/status.json');
     json = csvToJson.fieldDelimiter(',').getJsonFromCsv(filePath);
     res.render('Parking', { data: json, status:status });
 };
