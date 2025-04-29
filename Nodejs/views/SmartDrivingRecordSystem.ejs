@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
     <meta charset="UTF-8">
     <title>FileHistroy</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/explorer.css"></head>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <% Data["d:multistatus"]["d:response"].slice(1).forEach(response => { %>
             <% const href = response["d:href"][0]; %>
             <% const isFolder = href.endsWith('/'); %>
-            <div class="item <%= isFolder ? 'folder' : 'file' %>">
+            <div id="<%= href.split('/').pop() %>" class="item <%= isFolder ? 'folder' : 'file' %>">
                 <span><%= isFolder ? '📁' : '📄' %> <%= href.split('/').pop() %></span>
                 <div class="info">
                     <% if (isFolder) { %>
@@ -27,6 +28,7 @@
             </div>
         <% }); %>
     </div>
-    <script src="/script/explorer.js"></script>
+    <script src="/script/url.js"></script>
+    <script src="/script/nextcloud.js"></script>
 </body>
 </html>

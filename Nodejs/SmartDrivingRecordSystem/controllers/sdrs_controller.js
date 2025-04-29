@@ -8,6 +8,17 @@ const SDRS_Controller = {
         } catch (error) {
             res.status(500).send('Error retrieving files');
         }
+    },
+    delFile: async function (req, res) {
+      try {
+            const fileName = req.params["file"];
+            console.log(fileName);
+            const Data = await sdrs_model.delFile(fileName);
+            // res.render("SmartDrivingRecordSystem.ejs", {Data: Data});
+            res.send(`<pre>${JSON.stringify(Data, undefined, 2)}</pre>`);
+        } catch (error) {
+            res.status(500).send('Error retrieving files');
+        }
     }
 };
 
