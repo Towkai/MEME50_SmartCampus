@@ -1,2 +1,2 @@
-exports.addr = "218.32.100.27";
+exports.addr = "192.168.21.73";
 exports.port = 7000;

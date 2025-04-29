@@ -28,7 +28,6 @@ if __name__ == "__main__":
 				with open("./Nodejs/data/status.json","w")as file2:
 					file2.write("{\"status\":\"parked\"}")
 				with open("./Nodejs/data/park_data.json", "a") as file1:
-					file1.write("ParkSpace,Status,Time,TotalParkingTime\n")
 					file1.write(indata.decode()+"\n")
 					file1.close()
 			elif m[1].endswith("leave"):
