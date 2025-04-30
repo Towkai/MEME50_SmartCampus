@@ -10,7 +10,7 @@
 <body>
     <h1>檔案總管</h1>
     <div class="file-explorer" id="fileExplorer">
-        <% Data["d:multistatus"]["d:response"].slice(1).forEach(response => { %>
+        <% Data["d:multistatus"]["d:response"].slice(1).reverse().forEach(response => { %>
             <% const href = response["d:href"][0]; %>
             <% const isFolder = href.endsWith('/'); %>
             <div id="<%= href.split('/').pop() %>" class="item <%= isFolder ? 'folder' : 'file' %>">
