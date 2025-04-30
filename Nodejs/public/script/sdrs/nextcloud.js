@@ -1,3 +1,4 @@
+var intervalID = setInterval(checkFile, 5000);
 
 document.querySelectorAll('.delete-button').forEach(button => {
     button.addEventListener('click', async function () {
@@ -20,13 +21,26 @@ function delFile(file) {
         });
 }
 
-function getFile() {
+function getFiles() {
     axios.get(url("getFiles"))
         .then(response => {
             console.log(response.data.message);
         })
         .catch(error => {
             console.error('重新整理時發生錯誤:', error);
+        });
+}
+function checkFile() {
+    axios.get(url("checkFile"))
+        .then(response => {
+            let filecount = response.data["d:multistatus"]["d:response"].length - 1;
+            console.log("nextcloud file count: " + filecount);
+            let fileExplorer = document.getElementById("fileExplorer");
+            if (fileExplorer.childElementCount != filecount)
+                window.location.reload();
+        })
+        .catch(error => {
+            console.error('檢查檔案數量:', error);
         });
 }
 
