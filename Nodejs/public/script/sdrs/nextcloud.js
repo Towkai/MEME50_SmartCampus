@@ -33,11 +33,11 @@ function getFiles() {
 function checkFile() {
     axios.get(url("checkFile"))
         .then(response => {
-            let filecount = response.data["d:multistatus"]["d:response"].length - 1;
-            console.log("nextcloud file count: " + filecount);
+            let datas = response.data["d:multistatus"]["d:response"].slice(1)
+            let filecount = datas.length;
             let fileExplorer = document.getElementById("fileExplorer");
             if (fileExplorer.childElementCount != filecount)
-                window.location.reload();
+                setItem(datas);
         })
         .catch(error => {
             console.error('檢查檔案數量:', error);
@@ -68,7 +68,7 @@ function newItem(data) {
     item.className = `item ${isFolder ? 'folder' : 'file'}`;
     let span = document.createElement('span');
     span.className = "itemname";
-    span.innerText = `${isFolder ? '📁' : '📄'} ${href.split('/').pop()}`;
+    span.innerText = `${isFolder ? '📁' : '📄'} ${decodeURIComponent(href.split('/').pop())}`;
     item.append(span);
     let div = document.createElement('div');
     div.className = "info";

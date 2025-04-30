@@ -15,7 +15,7 @@
             <% const href = data["d:href"][0]; %>
             <% const isFolder = href.endsWith('/'); %>
             <div id="<%= href.split('/').pop() %>" class="item <%= isFolder ? 'folder' : 'file' %>">
-                <span class="itemname"><%= isFolder ? '📁' : '📄' %> <%= href.split('/').pop() %></span>
+                <span class="itemname"><%= isFolder ? '📁' : '📄' %> <%= decodeURIComponent(href.split('/').pop()) %></span>
                 <div class="info">
                     <% if (isFolder) { %>
                         <span>大小: N/A</span>
