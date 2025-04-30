@@ -9,11 +9,10 @@
 
 void receive_images(int client_sock)
 {
-    int img_count = 0;
     while (1)
     {
-        uint32_t size_net;
-        ssize_t n = read(client_sock, &size_net, sizeof(size_net));
+        int name_len;
+        ssize_t n = read(client_sock, &name_len, sizeof(name_len));
         if (n == 0)
         {
             printf("Client disconnected\n");
@@ -21,20 +20,33 @@ void receive_images(int client_sock)
         }
         else if (n < 0)
         {
+            perror("read name_len");
+            break;
+        }
+        else if (n != sizeof(name_len))
+        {
+            fprintf(stderr, "Incomplete name_len\n");
+            break;
+        }
+
+        char filename[256] = {0};
+        if (read(client_sock, filename, name_len) != name_len)
+        {
+            perror("read filename");
+            break;
+        }
+        filename[name_len] = '\0';
+
+        int size_net;
+        if (read(client_sock, &size_net, sizeof(size_net)) != sizeof(size_net))
+        {
             perror("read size");
             break;
         }
-        else if (n != sizeof(size_net))
-        {
-            fprintf(stderr, "Incomplete size header\n");
-            break;
-        }
 
-        uint32_t img_size = ntohl(size_net);
-        printf("Receiving image of size: %u bytes\n", img_size);
+        int img_size = ntohl(size_net);
+        printf("Receiving file '%s' of size: %d bytes\n", filename, img_size);
 
-        char filename[256];
-        snprintf(filename, sizeof(filename), "received_%d.jpg", img_count++);
         FILE *fp = fopen(filename, "wb");
         if (!fp)
         {
@@ -42,7 +54,7 @@ void receive_images(int client_sock)
             break;
         }
 
-        uint32_t received = 0;
+        int received = 0;
         char buffer[4096];
         while (received < img_size)
         {
@@ -58,7 +70,7 @@ void receive_images(int client_sock)
         }
 
         fclose(fp);
-        printf("Image saved as: %s\n", filename);
+        printf("File saved: %s\n", filename);
     }
 }
 
