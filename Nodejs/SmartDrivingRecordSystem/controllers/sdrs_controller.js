@@ -3,7 +3,7 @@ const SDRS_Controller = {
     getFiles: async function (req, res) {
       try {
             const Data = await sdrs_model.getFiles();
-            res.render("SmartDrivingRecordSystem.ejs", {Data: Data});
+            res.render("sdrs/SmartDrivingRecordSystem.ejs", {Data: Data});
             // res.send(`<pre>${JSON.stringify(Data, undefined, 2)}</pre>`);
         } catch (error) {
             res.status(500).send('Error retrieving files');
