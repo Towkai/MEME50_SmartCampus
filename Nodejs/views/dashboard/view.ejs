@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌入多個 Iframe</title>
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            margin: 0; /* 去掉默認邊距 */
+            display: flex; /* 使用 Flexbox */
+            flex-wrap: wrap; /* 允許換行 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 100vh; /* 使 body 高度為視口高度 */
+            background-color: #f0f0f0; /* 背景顏色 */
+        }
+        .iframe-container {
+            flex: 1 1 30%; /* 設置每個 iframe 的基礎寬度為 300px */
+            max-width: 45%; /* 最大寬度為 45% */
+            margin: 10px; /* 每個 iframe 之間的間距 */
+            position: relative; /* 相對定位以便使用絕對定位的子元素 */
+            overflow: hidden; /* 隱藏溢出的內容 */
+            border: 2px solid #ccc; /* 邊框 */
+            border-radius: 5px; /* 圓角 */
+            aspect-ratio: 4 / 3; 
+        }
+        iframe {
+            width: 100%; /* 佔滿容器的寬度 */
+            height: 100%; /* 佔滿容器的高度 */
+            border: none; /* 去掉邊框 */
+            position: absolute; /* 絕對定位 */
+            top: 0; /* 上邊距 */
+            left: 0; /* 左邊距 */
+        }
+    </style>
+</head>
+<body>
+    <% for (let i = 0; i < urls.length; i++) { %>
+        <div class="iframe-container">
+            <iframe src="<%= urls[i] %>" title="Feature <%= i %>"></iframe>
+        </div>
+    <% } %>
+
+</body>
+</html>
