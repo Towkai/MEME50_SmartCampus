@@ -7,6 +7,7 @@ router.use((req,res,next)=>{
     next();
 });
 router.get('/', controller.index);
+router.get('/dashboard', controller.dashboard);
 router.get('/parking', controller.Parking);
 
 module.exports = router;
