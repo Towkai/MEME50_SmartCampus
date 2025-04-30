@@ -1,1 +1,1 @@
-exports.urls = ["../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles"];
+exports.urls = ["../sdrs/getFiles","../parking","../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles","../sdrs/getFiles"];
