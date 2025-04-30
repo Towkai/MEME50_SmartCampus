@@ -21,3 +21,6 @@ app.use('/', main_router);
 
 var sdrs_router = require('./routers/sdrs_router');
 app.use('/sdrs', sdrs_router);
+
+var sdrs_router = require('./routers/NicoleFoodSystem_router');
+app.use('/NicoleFoodSystem', sdrs_router);

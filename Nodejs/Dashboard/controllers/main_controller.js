@@ -12,6 +12,7 @@ exports.index = (req, res) => {  //固定用法：建立名為"views"的資料�
     res.render(views.index, {message: [
         ["dashboard/view", "儀錶板"],
         ["sdrs/getFiles", "獲取檔案"],
+        ["NicoleFoodSystem", "溫度監控"],
     ]});
 };
 exports.dashboard = (req, res) => {  //固定用法：建立名為"views"的資料夾，將指定的ejs檔放在裡面
