@@ -15,7 +15,7 @@ void* thread_camera(void* arg);
 void* thread_upload(void* arg);
 extern int file_upload(char* filename);
 
-int main() {
+int main(int argc, char* argv[]) {
     // 確保輸出目錄存在
     char mkdir_command[256];
     snprintf(mkdir_command, sizeof(mkdir_command), "mkdir -p %s", OUTPUT_DIR);
@@ -27,7 +27,7 @@ int main() {
         pthread_t thread_upload_id;
         int res;
         void *thread_result;
-        res = pthread_create(&thread_camera_id, NULL, thread_camera, NULL);
+        res = pthread_create(&thread_camera_id, NULL, thread_camera, argc > 1 ? (char*)argv[1] : NULL);
         if (res != 0) {
             perror("Thread creation failed");
             exit(1);
@@ -65,7 +65,7 @@ void* thread_camera(void* arg) {
     char command[512];
     snprintf(command, sizeof(command),
             "libcamera-vid -t %d000 -o %s --codec h264 --width 1920 --height 1080",
-            RECORD_DURATION, temp_filename);
+            arg == NULL ? RECORD_DURATION : atoi(arg), temp_filename);
 
     // 執行 libcamera-vid 命令
     printf("執行命令: %s\n", command);
