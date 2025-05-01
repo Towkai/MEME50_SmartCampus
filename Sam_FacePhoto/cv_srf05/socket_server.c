@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 
 #define SERVER_PORT 6003
+#define SAVE_FOLDER "./web_images"
 
 void receive_images(int client_sock)
 {
@@ -47,7 +48,9 @@ void receive_images(int client_sock)
         int img_size = ntohl(size_net);
         printf("Receiving file '%s' of size: %d bytes\n", filename, img_size);
 
-        FILE *fp = fopen(filename, "wb");
+        char save_path[512];
+        snprintf(save_path, sizeof(save_path), "%s/%s", SAVE_FOLDER, filename);
+        FILE *fp = fopen(save_path, "wb");
         if (!fp)
         {
             perror("fopen");
