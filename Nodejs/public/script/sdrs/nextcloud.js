@@ -1,4 +1,8 @@
-var intervalID = setInterval(checkFile, 5000);
+var intervalID;
+window.onload = function(){
+    intervalID = setInterval(checkFile, 5000);
+};
+
 
 // document.querySelectorAll('.delete-button').forEach(button => {
 //     button.addEventListener('click', async function () {
@@ -11,8 +15,10 @@ var intervalID = setInterval(checkFile, 5000);
 // });
 
 async function onDelBtnClick(e) {
+    clearInterval(intervalID); //清除刷新計時器
     const href = e.getAttribute('data-href').split('/').pop();
     const confirmDelete = confirm(`您確定要刪除 ${decodeURIComponent(href)} 嗎？`);
+    intervalID = setInterval(checkFile, 5000); // 重設刷新計時器
     if (confirmDelete) {
         delFile(href);
     }
@@ -21,12 +27,11 @@ async function onDelBtnClick(e) {
 function delFile(file) {
     hideItem(file);
     axios.delete(url("delFile", file))
-        .then(response => {
-            // 刪除後重新取得檔案列表
-        })
-        .catch(error => {
-            console.error('刪除檔案時發生錯誤:', error);
-        });
+    .then(response => {
+    })
+    .catch(error => {
+        console.error('刪除檔案時發生錯誤:', error);
+    });
 }
 
 function getFiles() {
