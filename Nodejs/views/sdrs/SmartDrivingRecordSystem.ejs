@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -10,18 +10,19 @@
 <body>
     <h1>檔案總管</h1>
     <div class="file-explorer" id="fileExplorer">
-        <% Data["d:multistatus"]["d:response"].slice(1).forEach(response => { %>
-            <% const href = response["d:href"][0]; %>
+        <% const datas = Data["d:multistatus"]["d:response"].slice(1).reverse(); %>
+        <% datas.forEach(data => { %>
+            <% const href = data["d:href"][0]; %>
             <% const isFolder = href.endsWith('/'); %>
             <div id="<%= href.split('/').pop() %>" class="item <%= isFolder ? 'folder' : 'file' %>">
-                <span class="itemname"><%= isFolder ? '📁' : '📄' %> <%= href.split('/').pop() %></span>
+                <span class="itemname"><%= isFolder ? '📁' : '📄' %> <%= decodeURIComponent(href.split('/').pop()) %></span>
                 <div class="info">
                     <% if (isFolder) { %>
                         <span>大小: N/A</span>
-                        <span>，最後修改時間: <%= response["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0] %></span>
+                        <span>，最後修改時間: <%= data["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0] %></span>
                     <% } else { %>
-                        <span>大小: <%= response["d:propstat"][0]["d:prop"][0]["d:getcontentlength"][0] %> bytes</span>
-                        <span>，最後修改時間: <%= response["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0] %></span>
+                        <span>大小: <%= data["d:propstat"][0]["d:prop"][0]["d:getcontentlength"][0] %> bytes</span>
+                        <span>，最後修改時間: <%= data["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0] %></span>
                     <% } %>
                     <!-- 新增刪除按鈕 -->
                     <button class="delete-button" data-href="<%= href %>">刪除</button>
