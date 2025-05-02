@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const app = express();
-app.listen(ip.port, function() {
+app.listen(ip.port, function () {
      console.log(`Server running at http://${ip.addr}:${ip.port}`);
 });
 
@@ -14,8 +14,8 @@ app.use(cors({
      origin: ['http://localhost:7000', 'http://218.32.100.27:7000'],
      methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
      allowedHeaders: ['Content-Type']
- }));
- 
+}));
+
 var main_router = require('./routers/main_router');
 app.use('/', main_router);
 
@@ -24,3 +24,7 @@ app.use('/sdrs', sdrs_router);
 
 var sdrs_router = require('./routers/NicoleFoodSystem_router');
 app.use('/NicoleFoodSystem', sdrs_router);
+
+var sdrs_router = require('./routers/SamFacePhoto');
+app.use('/SamFacePhoto', sdrs_router);
+app.use('/images', express.static(path.join(__dirname, '../Sam_FacePhoto/cv_srf05/web_images')));
