@@ -25,6 +25,6 @@ app.use('/sdrs', sdrs_router);
 var sdrs_router = require('./routers/NicoleFoodSystem_router');
 app.use('/NicoleFoodSystem', sdrs_router);
 
-var sdrs_router = require('./routers/SamFacePhoto');
+var sdrs_router = require('./routers/imageRoutes');
 app.use('/SamFacePhoto', sdrs_router);
 app.use('/images', express.static(path.join(__dirname, 'public/web_images')));
