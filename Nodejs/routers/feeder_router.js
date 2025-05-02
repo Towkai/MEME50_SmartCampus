@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const feedController = require('../feeder/controllers/feedController');
+const feedController = require('../Feeder/Controllers/feedController');
 
 router.get('/', feedController.showFeedLog);
 
