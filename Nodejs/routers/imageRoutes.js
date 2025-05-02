@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const imageController = require('../SamFacePhoto/controllers/imageController');
 
-router.get('/images', imageController.getImages);
+router.get('/web_images', imageController.getImages);
 router.get('/videoPhoto', imageController.renderVideoPhoto);
 
 router.delete('/clear-images', (req, res) => {

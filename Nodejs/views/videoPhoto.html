@@ -42,7 +42,7 @@
 
     <script>
         async function loadImages() {
-            const res = await fetch('/SamFacePhoto/images');
+            const res = await fetch('/SamFacePhoto/web_images');
             const files = await res.json();
 
             // 把最新的放在最前面（也就是先出現的排在後面）
@@ -52,7 +52,7 @@
             gallery.innerHTML = '';
             files.forEach(file => {
                 const img = document.createElement('img');
-                img.src = '/images/' + file + '?t=' + Date.now(); // 避免快取
+                img.src = '/web_images/' + file + '?t=' + Date.now(); // 避免快取
                 gallery.prepend(img); // ← 用 prepend() 把最新的圖片放最上面
             });
         }
