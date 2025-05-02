@@ -1,24 +1,37 @@
-var intervalID = setInterval(checkFile, 5000);
+var intervalID;
+window.onload = function(){
+    intervalID = setInterval(checkFile, 5000);
+};
 
-document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', async function () {
-        const href = this.getAttribute('data-href').split('/').pop();
-        const confirmDelete = confirm(`您確定要刪除 ${href} 嗎？`);
-        if (confirmDelete) {
-            delFile(href);
-        }
-    });
-});
+
+// document.querySelectorAll('.delete-button').forEach(button => {
+//     button.addEventListener('click', async function () {
+//         const href = this.getAttribute('data-href').split('/').pop();
+//         const confirmDelete = confirm(`您確定要刪除 ${href} 嗎？`);
+//         if (confirmDelete) {
+//             delFile(href);
+//         }
+//     });
+// });
+
+async function onDelBtnClick(e) {
+    clearInterval(intervalID); //清除刷新計時器
+    const href = e.getAttribute('data-href').split('/').pop();
+    const confirmDelete = confirm(`您確定要刪除 ${decodeURIComponent(href)} 嗎？`);
+    intervalID = setInterval(checkFile, 5000); // 重設刷新計時器
+    if (confirmDelete) {
+        delFile(href);
+    }
+}
 
 function delFile(file) {
     hideItem(file);
     axios.delete(url("delFile", file))
-        .then(response => {
-            // 刪除後重新取得檔案列表
-        })
-        .catch(error => {
-            console.error('刪除檔案時發生錯誤:', error);
-        });
+    .then(response => {
+    })
+    .catch(error => {
+        console.error('刪除檔案時發生錯誤:', error);
+    });
 }
 
 function getFiles() {
@@ -46,7 +59,8 @@ function checkFile() {
 
 function hideItem(file) {
     let item = document.getElementById(file);
-    item.style.display = "none";
+    // item.style.display = "none";
+    item.remove();
 }
 
 function setItem(datas) {
@@ -57,7 +71,7 @@ function setItem(datas) {
     hideItems.forEach(item => hideItem(item));
 
     let newItems = datas.filter(data => !ids.includes(data["d:href"][0].split('/').pop()));
-    newItems.forEach(item => ids > 0 ? fileExplorer.insertBefore(newItem(item), fileExplorer.children[0]) : fileExplorer.append(newItem(item)));
+    newItems.forEach(item => ids.length > 0 ? fileExplorer.insertBefore(newItem(item), fileExplorer.children[0]) : fileExplorer.append(newItem(item)));
 }
 
 function newItem(data) {
@@ -79,6 +93,7 @@ function newItem(data) {
     span.innerText = `，最後修改時間: ${data["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0]}`;
     div.append(span)
     let button = document.createElement("button");
+    button.addEventListener('click', () => onDelBtnClick(button));
     button.className = "delete-button";
     button.setAttribute("data-href", href);
     button.innerText = "刪除";

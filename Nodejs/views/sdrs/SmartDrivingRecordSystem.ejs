@@ -25,7 +25,7 @@
                         <span>，最後修改時間: <%= data["d:propstat"][0]["d:prop"][0]["d:getlastmodified"][0] %></span>
                     <% } %>
                     <!-- 新增刪除按鈕 -->
-                    <button class="delete-button" data-href="<%= href %>">刪除</button>
+                    <button onclick="onDelBtnClick(this)" class="delete-button" data-href="<%= href %>">刪除</button>
                 </div>
             </div>
         <% }); %>
