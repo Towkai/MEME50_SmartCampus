@@ -27,3 +27,6 @@ app.use('/NicoleFoodSystem', nicole_router);
 
 var facephoto_router = require('./routers/imageRoutes');
 app.use('/SamFacePhoto', facephoto_router);
+
+var feeder_router = require('./routers/feeder_router');
+app.use('/feeder', feeder_router);
