@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 
 #define SERVER_PORT 6003
-#define SAVE_FOLDER "./web_images"
+#define SAVE_FOLDER "../../Nodejs/public/web_images"
 
 void receive_images(int client_sock)
 {
