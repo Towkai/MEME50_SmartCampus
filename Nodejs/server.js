@@ -19,6 +19,10 @@ app.use(cors({
 var main_router = require('./routers/main_router');
 app.use('/', main_router);
 
+var parking_router = require('./routers/parking_router');
+app.use('/', parking_router);
+
+
 var sdrs_router = require('./routers/sdrs_router');
 app.use('/sdrs', sdrs_router);
 
