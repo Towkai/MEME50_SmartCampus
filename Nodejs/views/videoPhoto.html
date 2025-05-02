@@ -31,11 +31,13 @@
         <div class="block">
             <h2>Flask 串流</h2>
             <img src="http://192.168.51.12:3000/video_feed" alt="串流">
+            <button onclick="clearImages()">清除所有圖片</button>
         </div>
         <div class="block">
             <h2>最新圖片</h2>
             <div id="gallery"></div>
         </div>
+
     </div>
 
     <script>
@@ -53,6 +55,18 @@
                 img.src = '/images/' + file + '?t=' + Date.now(); // 避免快取
                 gallery.prepend(img); // ← 用 prepend() 把最新的圖片放最上面
             });
+        }
+
+        async function clearImages() {
+            if (confirm("確定要刪除所有圖片嗎？")) {
+                const res = await fetch('/SamFacePhoto/clear-images', { method: 'DELETE' });
+                if (res.ok) {
+                    alert("圖片已清除！");
+                    loadImages(); // 重新載入圖片
+                } else {
+                    alert("清除失敗！");
+                }
+            }
         }
 
         loadImages();
