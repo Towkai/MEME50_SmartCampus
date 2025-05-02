@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const IMAGE_DIR = path.join(__dirname, '../public/web_images');
+const IMAGE_DIR = path.join(__dirname, '../../public/web_images');
 
 exports.getAllImages = (callback) => {
     fs.readdir(IMAGE_DIR, (err, files) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const imageController = require('../controllers/imageController');
+const imageController = require('../SamFacePhoto/controllers/imageController');
 
 router.get('/api/images', imageController.getImages);
 router.get('/videoPhoto', imageController.renderVideoPhoto);
