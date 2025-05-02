@@ -39,7 +39,7 @@ int main() {
 
         printf("client connected\n");
 
-        FILE* file = fopen("feed_log_server.csv", "w"); // 開啟 append 模式
+        FILE* file = fopen("../Nodejs/public/feeder/feed_log_server.csv", "w"); // 開啟 append 模式
         if (!file) {
             printf("open store file failed\n");
             close(client_sock);
