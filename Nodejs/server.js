@@ -27,4 +27,3 @@ app.use('/NicoleFoodSystem', nicole_router);
 
 var facephoto_router = require('./routers/imageRoutes');
 app.use('/SamFacePhoto', facephoto_router);
-app.use('/images', express.static(path.join(__dirname, 'public/web_images')));
