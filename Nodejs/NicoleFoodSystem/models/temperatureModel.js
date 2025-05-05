@@ -28,38 +28,24 @@ exports.generateHTML = (temperatureData) => {
       <h1>🌡️ 溫度列表</h1>
       <table>
         <tr>
-          <th>日期</th>
-          <th>時間</th>
+          <th>日期時間</th>
           <th>攝氏溫度 (°C)</th>
           <th>華氏溫度 (°F)</th>
           <th>是否超標</th>
         </tr>
   `;
 
+  // html += temperatureData;
+  // html += "<p></p>";
+  // html += temperatureData[0].split(' ').pop().split('|');
+  
   temperatureData.forEach(line => {
-    // 解析資料，假設格式為: [Server Received 時:分:秒] 溫度資訊...
-    const match = line.match(/\[Server Received (\d+):(\d+):(\d+)\] .*t=(\d+)/);
-    if (match) {
-      const now = new Date();
-      const date = now.toISOString().split('T')[0];
-      const hour = match[1];
-      const min = match[2];
-      const sec = match[3];
-      const tempMilliC = parseInt(match[4]);
-      const tempC = tempMilliC / 1000;
-      const tempF = (tempC * 9) / 5 + 32;
-      const isHigh = tempC >= 30;
-      
-      html += `
-        <tr>
-          <td>${date}</td>
-          <td>${hour}:${min}:${sec}</td>
-          <td>${tempC.toFixed(3)}</td>
-          <td>${tempF.toFixed(3)}</td>
-          <td${isHigh ? ' class="high"' : ''}>${isHigh ? '是' : '否'}</td>
-        </tr>
-      `;
-    }
+    line = line.split(' ');
+    let data = line.pop().split('|');
+    let tempC = data[0];
+    let tempF = data[1];
+    let isHigh = data[2];
+    html += '<tr><td>' + line + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == 'TEMP_HIGH' ? "alert" : "safe") + '</td></tr>';
   });
 
   html += `
