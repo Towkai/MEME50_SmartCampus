@@ -18,6 +18,7 @@ if __name__ == "__main__":
 		print('connected by' +str(addr))
 		with open("./Nodejs/public/data/park_data.csv", "w") as file1:
 					file1.write("CarID, Status, Time, TotalParkingTime\n")
+					file1.close()
 		while True:
 			indata = (conn.recv(1024))
 			if len(indata) == 0:

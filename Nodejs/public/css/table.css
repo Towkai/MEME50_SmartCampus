@@ -13,13 +13,14 @@ table {
 th,
 td {
   text-align: center;
-  border: 1px solid gray;
+  border: solid gray 1px;
   height: 50px;
 }
 
 th{
   background-color: silver;
 }
+
 
 tbody tr:hover {
   background-color: rgb(206, 203, 164);

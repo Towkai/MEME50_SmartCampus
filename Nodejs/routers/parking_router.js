@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const feedController = require('../Parking/controllers/parkingController');
+const parkingController = require('../Parking/controllers/parkingController');
 
-router.get('/', feedController.Parking);
+router.get('/', parkingController.Parking);
 
 module.exports = router;

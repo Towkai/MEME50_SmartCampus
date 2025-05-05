@@ -10,6 +10,7 @@
 </head>
 <body>
     <table class="current_status">
+        <tr><th colspan="2">停車用戶紀錄</th></tr>
         <tr><td>計費規則</td><td>10元/分鐘</td></tr>
         <% if (status.status == "spaced") { %>
         <tr><th><h2>狀態</h2></th><th style="color:green"><h2><%= "有空位" %></h2></th></tr>
@@ -20,7 +21,7 @@
     <table class="queryall_table">
         <tr><th colspan="4"><h2>停車紀錄</h2></th></tr>
         <tr><th>車牌</th><th>狀態</th><th>時間</th><th>繳費資訊</th></tr>
-        <% for (let i = 0; i < data.length; i++) { %>
+        <% for (let i = data.length-1; i >= 0; i--) { %>
         <tr>
             <td><%= data[i].CarID %></td>
             <td><%= data[i].Status %></td>
