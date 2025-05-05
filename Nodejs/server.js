@@ -19,6 +19,10 @@ app.use(cors({
 var main_router = require('./routers/main_router');
 app.use('/', main_router);
 
+var parking_router = require('./routers/parking_router');
+app.use('/parking', parking_router);
+
+
 var sdrs_router = require('./routers/sdrs_router');
 app.use('/sdrs', sdrs_router);
 
@@ -27,3 +31,6 @@ app.use('/NicoleFoodSystem', nicole_router);
 
 var facephoto_router = require('./routers/imageRoutes');
 app.use('/SamFacePhoto', facephoto_router);
+
+var feeder_router = require('./routers/feeder_router');
+app.use('/feeder', feeder_router);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>餵食紀錄</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>餵食紀錄</h1>
+    <table>
+        <tr>
+            <th>日期</th>
+            <th>時間</th>
+            <th>動物</th>
+        </tr>
+        <% records.forEach(row => { %>
+            <tr>
+                <td><%= row[0] %></td>
+                <td><%= row[1] %></td>
+                <td><%= row[2] %></td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

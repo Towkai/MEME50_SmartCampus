@@ -9,5 +9,5 @@ exports.getImages = (req, res) => {
 };
 
 exports.renderVideoPhoto = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../views/videoPhoto.html'));
+    res.render('SamFacePhoto/videoPhoto');
 };
