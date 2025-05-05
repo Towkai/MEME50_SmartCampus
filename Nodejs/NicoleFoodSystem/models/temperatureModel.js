@@ -18,21 +18,62 @@ exports.generateHTML = (temperatureData) => {
       <style>
         body { font-family: sans-serif; padding: 2em; background: #f7f7f7; }
         h1 { color: #333; }
-        ul { list-style-type: none; padding-left: 0; }
-        li { background: white; margin-bottom: 0.5em; padding: 0.5em 1em; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        table { border-collapse: collapse; width: 800px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background-color: #eee; }
+        .high { color: red; font-weight: bold; }
       </style>
     </head>
     <body>
       <h1>🌡️ 溫度列表</h1>
-      <ul>
+      <table>
+        <tr>
+          <th>日期</th>
+          <th>時間</th>
+          <th>攝氏溫度 (°C)</th>
+          <th>華氏溫度 (°F)</th>
+          <th>是否超標</th>
+        </tr>
   `;
 
   temperatureData.forEach(line => {
-    html += `<li>${line}</li>`;
+    // 解析資料，假設格式為: [Server Received 時:分:秒] 溫度資訊...
+    const match = line.match(/\[Server Received (\d+):(\d+):(\d+)\] .*t=(\d+)/);
+    console.log(`line: ${line}, ${match}`);
+    if (match) {
+      const now = new Date();
+      const date = now.toISOString().split('T')[0];
+      const hour = match[1];
+      const min = match[2];
+      const sec = match[3];
+      const tempMilliC = parseInt(match[4]);
+      const tempC = tempMilliC / 1000;
+      const tempF = (tempC * 9) / 5 + 32;
+      const isHigh = tempC >= 30;
+      console.log(`now: ${now}`);
+      console.log(`date: ${date}`);
+      console.log(`hour: ${hour}`);
+      console.log(`min: ${min}`);
+      console.log(`sec: ${sec}`);
+      console.log(`tempMilliC: ${tempMilliC}`);
+      console.log(`tempC: ${tempC}`);
+      console.log(`tempF: ${tempF}`);
+      console.log(`isHigh: ${isHigh}`);
+      
+      html += `
+        <tr>
+          <td>${date}</td>
+          <td>${hour}:${min}:${sec}</td>
+          <td>${tempC.toFixed(3)}</td>
+          <td>${tempF.toFixed(3)}</td>
+          <td${isHigh ? ' class="high"' : ''}>${isHigh ? '是' : '否'}</td>
+        </tr>
+      `;
+    }
   });
 
   html += `
-      </ul>
+      </table>
     </body>
     </html>
   `;

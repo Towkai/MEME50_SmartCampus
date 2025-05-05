@@ -72,7 +72,7 @@ int main() {
 
         printf("📥 收到資料：%s", buffer);
 
-        save_data_with_timestamp(buffer);
+        // save_data_with_timestamp(buffer);
 
         close(client_fd);
         /*把收到的資料讀到 buffer，再印到畫面，再用 save_data_with_timestamp() 存起來*/
