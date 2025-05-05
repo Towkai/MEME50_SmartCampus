@@ -39,7 +39,6 @@ exports.generateHTML = (temperatureData) => {
   temperatureData.forEach(line => {
     // 解析資料，假設格式為: [Server Received 時:分:秒] 溫度資訊...
     const match = line.match(/\[Server Received (\d+):(\d+):(\d+)\] .*t=(\d+)/);
-    console.log(`line: ${line}, ${match}`);
     if (match) {
       const now = new Date();
       const date = now.toISOString().split('T')[0];
@@ -50,15 +49,6 @@ exports.generateHTML = (temperatureData) => {
       const tempC = tempMilliC / 1000;
       const tempF = (tempC * 9) / 5 + 32;
       const isHigh = tempC >= 30;
-      console.log(`now: ${now}`);
-      console.log(`date: ${date}`);
-      console.log(`hour: ${hour}`);
-      console.log(`min: ${min}`);
-      console.log(`sec: ${sec}`);
-      console.log(`tempMilliC: ${tempMilliC}`);
-      console.log(`tempC: ${tempC}`);
-      console.log(`tempF: ${tempF}`);
-      console.log(`isHigh: ${isHigh}`);
       
       html += `
         <tr>
