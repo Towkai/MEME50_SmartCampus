@@ -1,0 +1,1 @@
+savedcmd_/home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/sdrs_camera_status.mod := printf '%s\n'   sdrs_camera_status.o | awk '!x[$$0]++ { print("/home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/"$$0) }' > /home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/sdrs_camera_status.mod

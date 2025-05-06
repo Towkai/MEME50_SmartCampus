@@ -1,0 +1,1 @@
+savedcmd_/home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/Module.symvers -T /home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/modules.order -i Module.symvers -e 

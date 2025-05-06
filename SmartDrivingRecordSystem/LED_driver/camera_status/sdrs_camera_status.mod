@@ -1,0 +1,1 @@
+/home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/camera_status/sdrs_camera_status.o
