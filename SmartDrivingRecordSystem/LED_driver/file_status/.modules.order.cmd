@@ -1,0 +1,1 @@
+savedcmd_/home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/file_status/modules.order := {   echo /home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/file_status/sdrs_file_status.o; :; } > /home/pi/git/MEME50_SmartCampus/SmartDrivingRecordSystem/LED_driver/file_status/modules.order
