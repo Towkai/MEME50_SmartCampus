@@ -51,7 +51,7 @@
             if (event.origin === window.location.origin) {
                 if (event.data === 'reloadNextcloud') {
                     const iframeB = document.getElementById('PFZgyCf9ff2WWzY');
-                    iframeB.contentWindow.location.reload(); // 重新整理 iframe B
+                    iframeB.contentWindow.location.reload(true); // 重新整理 iframe B
                 }
             }
         });
