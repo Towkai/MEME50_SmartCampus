@@ -28,6 +28,7 @@ function delFile(file) {
     hideItem(file);
     axios.delete(url("delFile", file))
     .then(response => {
+        window.parent.postMessage('reloadNextcloud', '*');
     })
     .catch(error => {
         console.error('刪除檔案時發生錯誤:', error);

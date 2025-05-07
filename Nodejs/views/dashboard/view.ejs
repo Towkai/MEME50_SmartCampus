@@ -39,9 +39,22 @@
 <body>
     <% for (let i = 0; i < urls.length; i++) { %>
         <div class="iframe-container">
-            <iframe src="<%= urls[i] %>" title="Feature <%= i %>"></iframe>
+            <iframe id="<%= urls[i].split('/').pop() %>" src="<%= urls[i] %>" title="Feature <%= i %>"></iframe>
         </div>
     <% } %>
 
+    <!-- Inline JavaScript -->
+    <script>
+        // 監聽來自 iframe A 的消息
+        window.addEventListener('message', function(event) {
+            // 檢查消息來源以確保安全
+            if (event.origin === window.location.origin) {
+                if (event.data === 'reloadNextcloud') {
+                    const iframeB = document.getElementById('PFZgyCf9ff2WWzY');
+                    iframeB.contentWindow.location.reload(); // 重新整理 iframe B
+                }
+            }
+        });
+    </script>
 </body>
 </html>
