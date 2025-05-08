@@ -40,12 +40,12 @@ exports.generateHTML = (temperatureData) => {
   // html += temperatureData[0].split(' ').pop().split('|');
   
   temperatureData.forEach(line => {
-    line = line.split('/');
+    line = trimChar(line, '\r').split('/');
     let data = line.pop().split('|');
-    let tempC = data[0];
-    let tempF = data[1];
-    let isHigh = data[2];
-    html += '<tr><td>' + new Date(trimChar(line[0], '[]')).toLocaleString('Taiwan', { hour12: false }) + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == 'TEMP_HIGH' ? "alert" : "safe") + '</td></tr>';
+    let tempC = data.shift();
+    let tempF = data.shift();
+    let isHigh = data.shift();
+    html += '<tr><td>' + new Date(trimChar(line[0], '[]')).toLocaleString('Taiwan', { hour12: false }) + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == "TEMP_HIGH" ? "alert" : "safe") + '</td></tr>';
   });
 
   html += `
