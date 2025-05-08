@@ -18,7 +18,7 @@ exports.generateHTML = (temperatureData) => {
       <style>
         body { font-family: sans-serif; padding: 2em; background: #f7f7f7; }
         h1 { color: #333; }
-        table { border-collapse: collapse; width: 800px; }
+        table { border-collapse: collapse; width: 90vw; }
         th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
         th { background-color: #eee; }
         .high { color: red; font-weight: bold; }
