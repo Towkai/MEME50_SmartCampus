@@ -30,8 +30,15 @@
             </div>
         <% }); %>
     </div>
-    <!-- <button onclick="window.location.reload()">Refresh</button> -->
 
+    <button id="reloadButton">重新整理 iframe B</button>
+
+    <script>
+        document.getElementById('reloadButton').addEventListener('click', function() {
+            // 發送消息給父窗口
+            window.parent.postMessage('reloadIframeB', '*');
+        });
+    </script>
 
     <!-- 模態框 -->
     <div id="myModal" class="modal">
