@@ -40,12 +40,12 @@ exports.generateHTML = (temperatureData) => {
   // html += temperatureData[0].split(' ').pop().split('|');
   
   temperatureData.forEach(line => {
-    line = line.split(' ');
+    line = line.split('/');
     let data = line.pop().split('|');
     let tempC = data[0];
     let tempF = data[1];
     let isHigh = data[2];
-    html += '<tr><td>' + line + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == 'TEMP_HIGH' ? "alert" : "safe") + '</td></tr>';
+    html += '<tr><td>' + new Date(trimChar(line[0], '[]')).toLocaleString('Taiwan', { hour12: false }) + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == 'TEMP_HIGH' ? "alert" : "safe") + '</td></tr>';
   });
 
   html += `
@@ -56,3 +56,17 @@ exports.generateHTML = (temperatureData) => {
 
   return html;
 };
+function trimChar(string, chars) {  
+  const strArr = string.split('');
+
+  // 找到第一個不排除的字元索引
+  const start = strArr.findIndex(ch => !chars.includes(ch));
+  if(start === -1) return '';
+
+  // 找到最後一個不排除的字元索引
+  let reverseStart = strArr.slice().reverse().findIndex(ch => !chars.includes(ch));
+  const end = string.length - reverseStart;
+
+  // 去頭去尾
+  return strArr.slice(start, end).join('');
+}
