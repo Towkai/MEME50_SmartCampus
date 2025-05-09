@@ -44,8 +44,9 @@ exports.generateHTML = (temperatureData) => {
     let data = line.pop().split('|');
     let tempC = data.shift();
     let tempF = data.shift();
-    let isHigh = data.shift();
-    html += '<tr><td>' + new Date(trimChar(line[0], '[]')).toLocaleString('Taiwan', { hour12: false }) + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + (isHigh == "TEMP_HIGH" ? "alert" : "safe") + '</td></tr>';
+    let isHigh = data == "TEMP_HIGH" ? "alert" : "safe";
+
+    html += '<tr><td>' + new Date(trimChar(line[0], '[]')).toLocaleString('Taiwan', { hour12: false }) + '</td><td>' + tempC + '</td><td>' + tempF + '</td><td>' + isHigh + '</td></tr>';
   });
 
   html += `
