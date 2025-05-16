@@ -1,4 +1,4 @@
-const url = 'http://218.32.100.27:1200/remote.php/dav/files/team-fire/MEME50/Videos/';
+const url = 'http://218.32.100.27:1200/remote.php/dav/files/team-fire/MEME50/期末專題《智慧校園》/SDRS_Videos/';
 const username = 'team-fire';
 const password = 'teamfire1234';
 function get_full_path(filename) {
