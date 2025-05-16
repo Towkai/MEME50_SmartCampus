@@ -5,7 +5,7 @@
 #define NEXTCLOUD_PORT 1200
 #define NEXTCLOUD_USERNAME "team-fire"
 #define NEXTCLOUD_PASSWORD "teamfire1234"
-#define NEXTCLOUD_PATH "Videos"
+#define NEXTCLOUD_PATH "MEME50/期末專題《智慧校園》/SDRS_Videos"
 
 char *next_userpwd() {
     static char userpwd[32];
